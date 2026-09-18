@@ -5,14 +5,16 @@
     </linearGradient>
   </defs>
   <rect width="512" height="512" rx="112" fill="url(#sky)"/>
-  <circle cx="392" cy="120" r="40" fill="#FFD36E" opacity=".9"/>
-  <g transform="translate(256 286) scale(2.6) translate(-50 -50)">
-    <path d="M50 26 q9 0 9 12 v30 q0 10-9 10 t-9-10 V38 q0-12 9-12z" fill="#F4FAFF"/>
-    <path d="M18 62 q-6 2-6 8 l30 3 v-14z" fill="#CFE6F9"/>
-    <path d="M82 62 q6 2 6 8 l-30 3 v-14z" fill="#CFE6F9"/>
-    <path d="M50 74 l-8 12 h16z" fill="#CFE6F9"/>
-    <ellipse cx="50" cy="46" rx="16" ry="14" fill="#0D1B2E"/>
-    <ellipse cx="43" cy="45" rx="4.4" ry="4.8" fill="#F4FAFF"/>
-    <ellipse cx="57" cy="45" rx="4.4" ry="4.8" fill="#F4FAFF"/>
+  <circle cx="398" cy="114" r="38" fill="#FFD36E" opacity=".9"/>
+  <g transform="translate(256 268) scale(3.1) translate(-50 -50)">
+    <path d="M50 12 q9 5 10 19 q-10-3-20 0 q1-14 10-19z" fill="#0E4E7B"/>
+    <path d="M30 52 q-26 4-27 15 q-1 7 7 6 l22-6z" fill="#CFE6F9"/>
+    <path d="M70 52 q26 4 27 15 q1 7-7 6 l-22-6z" fill="#CFE6F9"/>
+    <rect x="6" y="66" width="17" height="12" rx="6" fill="#A9D3F2"/>
+    <rect x="77" y="66" width="17" height="12" rx="6" fill="#A9D3F2"/>
+    <path d="M50 26 q22 0 22 24 v14 q0 22-22 28 q-22-6-22-28V50 q0-24 22-24z" fill="#F4FAFF"/>
+    <ellipse cx="50" cy="49" rx="17.5" ry="14" fill="#0D1B2E"/>
+    <ellipse cx="42.6" cy="48" rx="5.2" ry="5.6" fill="#F4FAFF"/>
+    <ellipse cx="57.4" cy="48" rx="5.2" ry="5.6" fill="#F4FAFF"/>
   </g>
 </svg>
