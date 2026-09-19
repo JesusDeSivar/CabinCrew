@@ -113,14 +113,19 @@ function personajes(pane) {
   const s = CC.store.get();
   const esc = CC.util.esc;
   CC.avatars.refresh();
-  pane.innerHTML = `<p class="hint">Toca un personaje desbloqueado para usarlo como tu avatar.</p>
+  const locked = CC.avatars.LIST.filter(a => !s.avatars.unlocked.includes(a.id)).length;
+  pane.innerHTML = `<p class="hint">Toca un personaje desbloqueado para usarlo como tu avatar.${
+    locked ? ' Los ' + locked + ' en gris se revelan al cumplir su reto.' : ''}</p>
     <div class="av-grid">
       ${CC.avatars.LIST.map(a => {
         const un = s.avatars.unlocked.includes(a.id);
         const on = s.profile.avatar === a.id;
         return `<button class="av-card ${un ? '' : 'locked'} ${on ? 'on' : ''}" type="button"
                   ${un ? '' : 'disabled'} data-av="${a.id}">
-            <span class="av-art">${un ? CC.avatars.svg(a.id, 72) : '<span class="av-lock">🔒</span>'}</span>
+            <span class="av-art">
+              ${CC.avatars.svg(a.id, 72)}
+              ${un ? '' : '<span class="av-lock" aria-hidden="true">🔒</span>'}
+            </span>
             <b>${esc(a.name)}</b>
             <small>${esc(un ? a.role : a.how)}</small>
           </button>`;

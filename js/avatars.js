@@ -157,13 +157,20 @@ CC.avatars = (function () {
         <circle cx="90" cy="84" r="2.5" fill="#FF4D5E"/><circle cx="10" cy="84" r="2.5" fill="#17C26A"/>
       </g>`,
 
-    /* ── Nube Cumulita (compañera de racha) ── */
+    /* ── Luna, la compañera del vuelo nocturno ── */
     luna: () => `
       <g>
-        <circle cx="50" cy="52" r="26" fill="#2B3E66"/>
-        <path d="M50 26 a26 26 0 1 0 22 40 a22 22 0 0 1-22-40z" fill="#F6D976"/>
-        ${face(44, 52, { spread: 8, eye: 4, blush: true })}
-        <circle cx="76" cy="26" r="3" fill="#F6D976"/><circle cx="24" cy="24" r="2" fill="#F6D976"/>
+        <circle cx="50" cy="52" r="27" fill="#F6D976"/>
+        <circle cx="34" cy="38" r="5" fill="#E8C55B" opacity=".8"/>
+        <circle cx="67" cy="66" r="6.5" fill="#E8C55B" opacity=".8"/>
+        <circle cx="70" cy="40" r="3.5" fill="#E8C55B" opacity=".8"/>
+        <path d="M38 48 q4 4 8 0" stroke="#7A5E12" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+        <path d="M54 48 q4 4 8 0" stroke="#7A5E12" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+        <ellipse cx="34" cy="58" rx="4.6" ry="3" fill="#FF8FA3" opacity=".6"/>
+        <ellipse cx="66" cy="58" rx="4.6" ry="3" fill="#FF8FA3" opacity=".6"/>
+        <path d="M44 57 q6 7 12 0" stroke="#7A5E12" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+        <path d="M78 18 l2 5 5 2 -5 2 -2 5 -2-5 -5-2 5-2z" fill="#F6D976"/>
+        <circle cx="20" cy="22" r="2.4" fill="#F6D976"/>
       </g>`
   };
 
@@ -186,7 +193,7 @@ CC.avatars = (function () {
       check: s => s.streak.best >= 7 },
     { id: 'jet',    name: 'Jet',        role: 'Reactor delgado y veloz',   how: 'Aprueba un simulacro de examen',
       check: s => (s.stats.examBest || 0) >= 70 },
-    { id: 'luna',   name: 'Luna',       role: 'Vuelo nocturno',            how: 'Haz 100 repasos Anki',
+    { id: 'luna',   name: 'Luna',       role: 'Compañera de vuelos nocturnos', how: 'Haz 100 repasos Anki',
       check: s => (s.stats.reviews || 0) >= 100 }
   ];
 

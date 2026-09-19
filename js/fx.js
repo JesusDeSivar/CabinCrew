@@ -88,5 +88,17 @@ CC.fx = (function () {
     }, ms || 2600);
   }
 
-  return { sfx, buzz, confetti, toast };
+  /* Aviso de versión nueva: recargar es decisión del usuario, no vaya a ser
+     que le cortemos una lección a medias. */
+  function updateReady() {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    toast('<div class="toast-in"><span class="toast-ic">🆕</span>' +
+          '<span><b>Hay una versión nueva</b><small>Recarga para verla</small></span>' +
+          '<button class="btn primary toast-btn" type="button" id="toast-reload">RECARGAR</button></div>', 15000);
+    const b = document.getElementById('toast-reload');
+    if (b) b.addEventListener('click', () => location.reload());
+  }
+
+  return { sfx, buzz, confetti, toast, updateReady };
 })();
