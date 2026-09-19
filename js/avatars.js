@@ -59,17 +59,29 @@ CC.avatars = (function () {
         <rect x="61" y="87.5" width="10" height="2.8" rx="1.4" fill="#F5C33B"/>
       </g>`,
 
-    /* ── Capitán Max ── */
+    /* ── Capitán Max, piloto de línea aérea ── */
     max: () => `
       <g>
-        <path d="M26 88 q4-18 24-20 q20 2 24 20z" fill="#10305A"/>
-        <path d="M32 44 q0-20 18-20 t18 20 v10 q0 18-18 18T32 54z" fill="#F3CBA6"/>
-        <path d="M26 40 h48 q2-18-24-18T26 40z" fill="#0E2547"/>
-        <path d="M24 40 h52 q4 0 4 5 H20q0-5 4-5z" fill="#1B3D6E"/>
-        <circle cx="50" cy="31" r="4.5" fill="#F5C33B"/>
-        ${face(50, 48, { spread: 9, eye: 4.2, blush: false })}
-        <path d="M42 60 q8 5 16 0 q-4 6-8 6t-8-6z" fill="#9C8367"/>
-        <rect x="30" y="78" width="40" height="5" rx="2.5" fill="#F5C33B"/>
+        <path d="M24 90 q6-20 26-22 q20 2 26 22z" fill="#F1F6FB"/>
+        <path d="M44 66 h12 v11 q-6 5-12 0z" fill="#E3B189"/>
+        <path d="M44 77 l6 6 6-6 l4 3 -10 12 -10-12z" fill="#16263D"/>
+        <path d="M48 83 l4 0 1 12 -3 3 -3-3z" fill="#22344F"/>
+        <rect x="25" y="80" width="15" height="10" rx="2.5" fill="#16355E"/>
+        <rect x="60" y="80" width="15" height="10" rx="2.5" fill="#16355E"/>
+        <g fill="#F5C33B">
+          <rect x="27" y="81.5" width="11" height="1.4" rx=".7"/><rect x="27" y="83.8" width="11" height="1.4" rx=".7"/>
+          <rect x="27" y="86.1" width="11" height="1.4" rx=".7"/><rect x="27" y="88.4" width="11" height="1.4" rx=".7"/>
+          <rect x="62" y="81.5" width="11" height="1.4" rx=".7"/><rect x="62" y="83.8" width="11" height="1.4" rx=".7"/>
+          <rect x="62" y="86.1" width="11" height="1.4" rx=".7"/><rect x="62" y="88.4" width="11" height="1.4" rx=".7"/>
+        </g>
+        <path d="M34 48 q0-19 16-19 t16 19 v7 q0 17-16 17T34 55z" fill="#F0C39C"/>
+        <path d="M29 41.5 h42 q3.5 0 3.5 3 q-24 4.5-49 0 q0-3 3.5-3z" fill="#0A1B36"/>
+        <path d="M31 27 q19-14 38 0 l2 15 q-21-7-42 0z" fill="#122C51"/>
+        <path d="M30 38.5 h40 v4 h-40z" fill="#0A1B36"/>
+        <path d="M41 32 q9-5 18 0 q-5 2-9 2 t-9-2z" fill="#F5C33B"/>
+        <circle cx="50" cy="32" r="2.6" fill="#F5C33B"/>
+        ${face(50, 52, { spread: 7, eye: 4.6, blush: false })}
+        <path d="M44 60 q6 3 12 0 q-3 5-6 5 t-6-5z" fill="#8A7157"/>
       </g>`,
 
     /* ── Trolley Tito ── */
@@ -114,17 +126,26 @@ CC.avatars = (function () {
         <circle cx="34" cy="76" r="4" fill="#E4443F"/><circle cx="66" cy="76" r="4" fill="#E4443F"/>
       </g>`,
 
-    /* ── Rosa, jefa de cabina ── */
-    rosa: () => `
+    /* ── Tomás, controlador aéreo ── */
+    tomas: () => `
       <g>
-        <path d="M28 88 q3-18 22-20 q19 2 22 20z" fill="#5B2A6E"/>
-        <path d="M42 68 h16 v10 q-8 6-16 0z" fill="#C88A63"/>
-        <path d="M31 44 q0-20 19-20 t19 20 v9 q0 18-19 18T31 53z" fill="#D69A72"/>
-        <path d="M29 44 q2-24 21-24 t21 24 q2-14-21-16T29 44z" fill="#20160F"/>
-        <circle cx="30" cy="52" r="6" fill="#20160F"/><circle cx="70" cy="52" r="6" fill="#20160F"/>
-        ${face(50, 47, { spread: 9, eye: 4.2 })}
-        <path d="M40 70 q10 8 20 0 l6 4 q-16 12-32 0z" fill="#8E44AD"/>
-        <path d="M50 78 l3 6-3 6-3-6z" fill="#F5C33B"/>
+        <path d="M26 90 q5-19 24-21 q19 2 24 21z" fill="#3E5474"/>
+        <path d="M44 67 h12 v10 q-6 5-12 0z" fill="#D89F78"/>
+        <path d="M43 75 l7 8 7-8 l4 3 -11 11 -11-11z" fill="#2E415C"/>
+        <path d="M41 77 l7 12" stroke="#F5C33B" stroke-width="1.8" fill="none"/>
+        <path d="M59 77 l-7 12" stroke="#F5C33B" stroke-width="1.8" fill="none"/>
+        <rect x="45" y="87" width="10" height="7" rx="1.6" fill="#EDF3F9"/>
+        <rect x="46.5" y="89" width="7" height="1.3" rx=".6" fill="#8AA0BC"/>
+        <path d="M34 48 q0-19 16-19 t16 19 v7 q0 17-16 17T34 55z" fill="#E0A87E"/>
+        <path d="M32 42 q2-18 18-18 t18 18 q-3-10-18-10 t-18 10z" fill="#2E2018"/>
+        <path d="M36 62 q14 6 28 0 q-2 10-14 10 t-14-10z" fill="#2E2018" opacity=".26"/>
+        <path d="M29 46 q21-22 42 0" stroke="#22344F" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <rect x="24" y="44" width="10" height="16" rx="5" fill="#22344F"/>
+        <rect x="66" y="44" width="10" height="16" rx="5" fill="#22344F"/>
+        <circle cx="71" cy="49" r="2" fill="#17C26A"/>
+        <path d="M30 59 q3 11 13 11" stroke="#22344F" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <circle cx="44" cy="70" r="3.4" fill="#22344F"/>
+        ${face(50, 51, { spread: 7, eye: 4.6, blush: false })}
       </g>`,
 
     /* ── Kit, el botiquín ── */
@@ -189,7 +210,7 @@ CC.avatars = (function () {
       check: () => CC.store.unitProgress('surv').pct >= 1 },
     { id: 'kit',    name: 'Kit',        role: 'Botiquín de a bordo',       how: 'Completa la unidad de primeros auxilios',
       check: () => CC.store.unitProgress('pa').pct >= 1 },
-    { id: 'rosa',   name: 'Rosa',       role: 'Instructora de cabina',     how: 'Mantén una racha de 7 días',
+    { id: 'tomas',  name: 'Tomás',      role: 'Controlador aéreo',         how: 'Mantén una racha de 7 días',
       check: s => s.streak.best >= 7 },
     { id: 'jet',    name: 'Jet',        role: 'Reactor delgado y veloz',   how: 'Aprueba un simulacro de examen',
       check: s => (s.stats.examBest || 0) >= 70 },

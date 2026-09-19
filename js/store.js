@@ -41,6 +41,7 @@ CC.store = (function () {
       const raw = localStorage.getItem(KEY);
       if (!raw) return defaults();
       const parsed = JSON.parse(raw);
+      migrate(parsed);
       return Object.assign(defaults(), parsed, {
         profile: Object.assign(defaults().profile, parsed.profile),
         daily: Object.assign(defaults().daily, parsed.daily),
@@ -50,6 +51,16 @@ CC.store = (function () {
         hearts: Object.assign(defaults().hearts, parsed.hearts)
       });
     } catch (e) { return defaults(); }
+  }
+
+  /* Rosa dejó el elenco: su hueco lo ocupa Tomás, el controlador aéreo. */
+  function migrate(st) {
+    if (!st) return;
+    if (st.profile && st.profile.avatar === 'rosa') st.profile.avatar = 'tomas';
+    if (st.avatars && Array.isArray(st.avatars.unlocked)) {
+      st.avatars.unlocked = st.avatars.unlocked.map(id => (id === 'rosa' ? 'tomas' : id))
+        .filter((id, i, all) => all.indexOf(id) === i);
+    }
   }
 
   function save() {
