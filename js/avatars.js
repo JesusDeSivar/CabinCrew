@@ -23,29 +23,40 @@ CC.avatars = (function () {
   }
 
   const ART = {
-    /* ── Avión Avi ── */
+    /* ── Avi, el widebody regordete ── */
     avi: () => `
       <g>
-        <path d="M50 26 q9 0 9 12 v30 q0 10-9 10 t-9-10 V38 q0-12 9-12z" fill="#2FA8F5"/>
-        <path d="M18 62 q-6 2-6 8 l30 3 v-14z" fill="#1E86D0"/>
-        <path d="M82 62 q6 2 6 8 l-30 3 v-14z" fill="#1E86D0"/>
-        <path d="M50 74 l-8 12 h16z" fill="#1E86D0"/>
-        <ellipse cx="50" cy="46" rx="16" ry="14" fill="#EAF6FF"/>
-        ${face(50, 45, { spread: 7, eye: 4.4 })}
-        <circle cx="34" cy="80" r="3" fill="#FFB020"/><circle cx="66" cy="80" r="3" fill="#17C26A"/>
+        <path d="M50 12 q9 5 10 19 q-10-3-20 0 q1-14 10-19z" fill="#1A6FAE"/>
+        <path d="M30 52 q-26 4-27 15 q-1 7 7 6 l22-6z" fill="#1E86D0"/>
+        <path d="M70 52 q26 4 27 15 q1 7-7 6 l-22-6z" fill="#1E86D0"/>
+        <rect x="6" y="66" width="17" height="12" rx="6" fill="#15679E"/>
+        <rect x="77" y="66" width="17" height="12" rx="6" fill="#15679E"/>
+        <ellipse cx="14.5" cy="72" rx="4" ry="4.6" fill="#0E4E7B"/>
+        <ellipse cx="85.5" cy="72" rx="4" ry="4.6" fill="#0E4E7B"/>
+        <path d="M50 26 q22 0 22 24 v14 q0 22-22 28 q-22-6-22-28V50 q0-24 22-24z" fill="#2FA8F5"/>
+        <ellipse cx="50" cy="49" rx="17.5" ry="14" fill="#EAF6FF"/>
+        ${face(50, 48, { spread: 7.4, eye: 5.2 })}
+        <ellipse cx="50" cy="84" rx="11" ry="8" fill="#DCEBF8"/>
+        <circle cx="95" cy="73" r="2.8" fill="#FF4D5E"/><circle cx="5" cy="73" r="2.8" fill="#17C26A"/>
       </g>`,
 
-    /* ── Lía, tripulante de cabina ── */
+    /* ── Lía, jefa de vuelo ── */
     lia: () => `
       <g>
-        <path d="M28 88 q3-18 22-20 h0 q19 2 22 20z" fill="#123C6B"/>
-        <path d="M42 68 h16 v10 q-8 6-16 0z" fill="#F0C9A8"/>
-        <path d="M30 42 q0-20 20-20 t20 20 v10 q0 18-20 18T30 52z" fill="#F7D6B8"/>
-        <path d="M28 40 q4-22 22-22 t22 22 q-6-8-22-8T28 40z" fill="#3A2418"/>
-        <path d="M72 44 q8 4 6 14 q-6 2-8-6z" fill="#3A2418"/>
-        ${face(50, 46, { spread: 9, eye: 4.2 })}
-        <path d="M40 70 q10 8 20 0 l6 4 q-16 12-32 0z" fill="#E4443F"/>
-        <rect x="44" y="76" width="12" height="7" rx="3.5" fill="#F5C33B"/>
+        <path d="M27 88 q3-19 23-21 q20 2 23 21z" fill="#123C6B"/>
+        <path d="M40 66 h20 v11 q-10 7-20 0z" fill="#E8B88F"/>
+        <path d="M40 77 q10 8 20 0 l5 3 -15 11 -15-11z" fill="#E4443F"/>
+        <path d="M33 47 q0-20 17-20 t17 20 v8 q0 18-17 18T33 55z" fill="#F7D6B8"/>
+        <path d="M31 48 q1-24 19-24 t19 24 q2-12-19-14 T31 48z" fill="#5A3A26"/>
+        <path d="M69 49 q9 5 7 16 q-7 2-9-7z" fill="#5A3A26"/>
+        <path d="M31 31 q19-12 38 0 l-2 5 q-17-7-34 0z" fill="#16355E"/>
+        <path d="M33 25 q17-9 34 0 q1 6-17 6 t-17-6z" fill="#0E2547"/>
+        <path d="M43 26 q7-3 14 0 q-7 2-14 0z" fill="#F5C33B"/>
+        ${face(50, 49, { spread: 7, eye: 4.8 })}
+        <rect x="29" y="83" width="10" height="2.8" rx="1.4" fill="#F5C33B"/>
+        <rect x="29" y="87.5" width="10" height="2.8" rx="1.4" fill="#F5C33B"/>
+        <rect x="61" y="83" width="10" height="2.8" rx="1.4" fill="#F5C33B"/>
+        <rect x="61" y="87.5" width="10" height="2.8" rx="1.4" fill="#F5C33B"/>
       </g>`,
 
     /* ── Capitán Max ── */
@@ -127,16 +138,23 @@ CC.avatars = (function () {
         ${face(50, 46, { spread: 10, eye: 3.6, blush: true })}
       </g>`,
 
-    /* ── Jet, el reactor veloz ── */
+    /* ── Jet, el reactor delgado ── */
     jet: () => `
       <g>
-        <path d="M22 58 q10-8 28-8 h14 q12 0 16 10 q-4 10-16 10 H50 q-18 0-28-8z" fill="#3C4C66"/>
-        <path d="M44 50 l10-20 h6 l-4 20z" fill="#2B3950"/>
-        <path d="M46 68 l6 14 h6 l-4-14z" fill="#2B3950"/>
-        <ellipse cx="66" cy="60" rx="14" ry="10" fill="#EAF2FB"/>
-        ${face(68, 59, { spread: 6, eye: 3.8, wink: true })}
-        <path d="M22 54 q-12 2-16 6 q12 2 16 4z" fill="#FF8A3D"/>
-        <path d="M18 60 q-14 2-18 4 q10 2 18 2z" fill="#FFC04D"/>
+        <path d="M50 8 q5 8 5 16 l-10 0 q0-8 5-16z" fill="#2A3B55"/>
+        <path d="M41 46 l-35 30 q-2 2 1 3 l10-1 l26-20z" fill="#42597A"/>
+        <path d="M59 46 l35 30 q2 2-1 3 l-10-1 l-26-20z" fill="#42597A"/>
+        <path d="M8 77 l-4 10 q-1 3 2 3 l5-2 l1-11z" fill="#31435F"/>
+        <path d="M92 77 l4 10 q1 3-2 3 l-5-2 l-1-11z" fill="#31435F"/>
+        <path d="M50 14 q10 0 10 20 v24 q0 18-10 26 q-10-8-10-26V34 q0-20 10-20z" fill="#55708F"/>
+        <path d="M40 62 h20 v3.5 h-20z" fill="#FF8A3D" opacity=".9"/>
+        <path d="M38 37 q12-7 24 0 q1 8-12 8 t-12-8z" fill="#16263D"/>
+        <rect x="37" y="34.5" width="26" height="3.4" rx="1.7" fill="#0E1826"/>
+        <circle cx="43.5" cy="39" r="1.8" fill="#7FD4FF" opacity=".85"/>
+        <path d="M45 51 q5 3.5 10-1" stroke="#16263D" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M45 82 q5 4 10 0 l-2.5 10 q-2.5 3.5-5 0z" fill="#FF8A3D"/>
+        <path d="M47 85 q3 2.5 6 0 l-1.5 6 q-1.5 2-3 0z" fill="#FFD166"/>
+        <circle cx="90" cy="84" r="2.5" fill="#FF4D5E"/><circle cx="10" cy="84" r="2.5" fill="#17C26A"/>
       </g>`,
 
     /* ── Nube Cumulita (compañera de racha) ── */
@@ -150,8 +168,8 @@ CC.avatars = (function () {
   };
 
   const LIST = [
-    { id: 'avi',    name: 'Avi',        role: 'Tu avión de cabecera',      how: 'Disponible desde el inicio', check: () => true },
-    { id: 'lia',    name: 'Lía',        role: 'Tripulante de cabina',      how: 'Disponible desde el inicio', check: () => true },
+    { id: 'avi',    name: 'Avi',        role: 'Widebody de cabecera',      how: 'Disponible desde el inicio', check: () => true },
+    { id: 'lia',    name: 'Lía',        role: 'Jefa de vuelo',             how: 'Disponible desde el inicio', check: () => true },
     { id: 'max',    name: 'Capitán Max', role: 'Comandante',               how: 'Alcanza el nivel 3',
       check: s => CC.store.level() >= 3 },
     { id: 'tito',   name: 'Tito',       role: 'Carro de servicio',         how: 'Completa 6 lecciones',
@@ -164,9 +182,9 @@ CC.avatars = (function () {
       check: () => CC.store.unitProgress('surv').pct >= 1 },
     { id: 'kit',    name: 'Kit',        role: 'Botiquín de a bordo',       how: 'Completa la unidad de primeros auxilios',
       check: () => CC.store.unitProgress('pa').pct >= 1 },
-    { id: 'rosa',   name: 'Rosa',       role: 'Jefa de cabina',            how: 'Mantén una racha de 7 días',
+    { id: 'rosa',   name: 'Rosa',       role: 'Instructora de cabina',     how: 'Mantén una racha de 7 días',
       check: s => s.streak.best >= 7 },
-    { id: 'jet',    name: 'Jet',        role: 'Reactor veloz',             how: 'Aprueba un simulacro de examen',
+    { id: 'jet',    name: 'Jet',        role: 'Reactor delgado y veloz',   how: 'Aprueba un simulacro de examen',
       check: s => (s.stats.examBest || 0) >= 70 },
     { id: 'luna',   name: 'Luna',       role: 'Vuelo nocturno',            how: 'Haz 100 repasos Anki',
       check: s => (s.stats.reviews || 0) >= 100 }

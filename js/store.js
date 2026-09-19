@@ -12,7 +12,7 @@ CC.store = (function () {
     { min: 3,  name: 'Tripulante junior' },
     { min: 5,  name: 'TCP certificado' },
     { min: 7,  name: 'Sobrecargo' },
-    { min: 9,  name: 'Jefe de cabina' },
+    { min: 9,  name: 'Jefe de vuelo' },
     { min: 12, name: 'Instructor de cabina' }
   ];
 
