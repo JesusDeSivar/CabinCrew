@@ -46,6 +46,11 @@
 <script>
   CC.app.boot();
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+    const hadController = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      // Sólo avisamos si ya se estaba usando una versión anterior.
+      if (hadController) CC.fx.updateReady();
+    });
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('sw.js').catch(() => {});
     });

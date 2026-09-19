@@ -445,11 +445,16 @@ body[data-view="welcome"] #screen { padding: 0 var(--gut) 0; }
   padding: 12px 8px; display: grid; gap: 3px; justify-items: center; color: var(--txt);
 }
 .av-card.on { border-color: var(--sky); background: var(--sky-soft); }
-.av-card.locked { opacity: .75; }
+.av-card.locked { opacity: 1; }
+.av-card.locked .avatar { filter: grayscale(1) contrast(.55) brightness(1.18); opacity: .5; }
+.av-card.locked b { color: var(--muted); }
 .av-card b { font-size: 14px; }
 .av-card small { font-size: 11px; color: var(--muted); text-align: center; line-height: 1.3; }
-.av-art { height: 72px; display: grid; place-items: center; }
-.av-lock { font-size: 30px; }
+.av-art { height: 72px; display: grid; place-items: center; position: relative; }
+.av-lock {
+  position: absolute; right: -2px; bottom: -2px; font-size: 17px; line-height: 1;
+  background: var(--surf); border-radius: 50%; padding: 4px; box-shadow: 0 1px 4px var(--shadow);
+}
 .ach { background: var(--surf); border-radius: var(--r-md); padding: 12px 10px; display: grid; gap: 3px; justify-items: center; text-align: center; opacity: .55; box-shadow: 0 2px 8px var(--shadow); }
 .ach.on { opacity: 1; border-bottom: 3px solid var(--sun); }
 .ach-ic { font-size: 26px; }
@@ -489,6 +494,7 @@ body[data-view="welcome"] #screen { padding: 0 var(--gut) 0; }
 .toast-in { display: flex; align-items: center; gap: 10px; font-size: 14px; }
 .toast-ic { font-size: 26px; display: grid; place-items: center; }
 .toast-in small { display: block; color: var(--muted); font-size: 12px; }
+.toast-btn { padding: 8px 12px; font-size: 12px; margin-left: 2px; }
 #fx-canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
 
 @media (prefers-reduced-motion: reduce) {
