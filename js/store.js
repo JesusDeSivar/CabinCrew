@@ -30,7 +30,7 @@ CC.store = (function () {
       stats: { answered: 0, correct: 0, reviews: 0, exams: 0, examBest: 0, byUnit: {} },
       achievements: {},
       avatars: { unlocked: ['avi', 'lia'] },
-      settings: { sound: true, haptics: true, newPerDay: 15, maxReviews: 60 }
+      settings: { sound: true, haptics: true, newPerDay: 15, maxReviews: 60, course: 'tcp' }
     };
   }
 
@@ -73,8 +73,8 @@ CC.store = (function () {
   const LESSON_SIZE = 4;
   const LESSONS = (function () {
     const out = [];
-    CC.UNITS.forEach(u => {
-      const cards = CC.CARDS.filter(c => c.unit === u.id);
+    CC.ALL_UNITS.forEach(u => {
+      const cards = CC.ALL_CARDS.filter(c => c.unit === u.id);
       for (let i = 0; i < cards.length; i += LESSON_SIZE) {
         const chunk = cards.slice(i, i + LESSON_SIZE);
         out.push({ id: u.id + '-' + (out.filter(l => l.unit === u.id).length + 1),
@@ -93,10 +93,12 @@ CC.store = (function () {
     const l = lessonById(id);
     if (!l) return 'locked';
     const unitLessons = lessonsOfUnit(l.unit);
-    const uIndex = CC.UNITS.findIndex(u => u.id === l.unit);
+    // cada curso tiene su propia ruta: la unidad anterior es la de su mismo curso
+    const units = CC.unitsOf(CC.util.unitOf(l.unit).course);
+    const uIndex = units.findIndex(u => u.id === l.unit);
     if (l.index === 0) {
       if (uIndex === 0) return 'open';
-      const prevUnit = CC.UNITS[uIndex - 1].id;
+      const prevUnit = units[uIndex - 1].id;
       const prevDone = lessonsOfUnit(prevUnit).every(x => state.lessons[x.id] && state.lessons[x.id].done);
       // la unidad anterior no bloquea del todo: basta con la mitad hecha
       const half = lessonsOfUnit(prevUnit).filter(x => state.lessons[x.id] && state.lessons[x.id].done).length;
@@ -113,7 +115,8 @@ CC.store = (function () {
   }
 
   function nextLesson() {
-    for (const l of LESSONS) if (lessonState(l.id) === 'open') return l;
+    const active = new Set(CC.UNITS.map(u => u.id));
+    for (const l of LESSONS) if (active.has(l.unit) && lessonState(l.id) === 'open') return l;
     return null;
   }
 
@@ -285,6 +288,12 @@ CC.store = (function () {
     return state.stats.answered ? state.stats.correct / state.stats.answered : 0;
   }
 
+  function setCourse(id) {
+    if (!CC.COURSES.some(c => c.id === id)) return;
+    state.settings.course = id;
+    save();
+  }
+
   function reset() { state = defaults(); save(); }
 
   function importState(obj) {
@@ -300,6 +309,6 @@ CC.store = (function () {
     touchDay, registerActivity, addXP, weekHistory,
     hearts, loseHeart, gainHeart, heartTimer, HEART_MAX, HEART_REFILL_MS,
     srsCard, gradeCard, introduce, dueCards, newCards, reviewQueue, srsCounts,
-    recordAnswer, completeLesson, recordExam, accuracy
+    recordAnswer, completeLesson, recordExam, accuracy, setCourse
   };
 })();

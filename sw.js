@@ -2,10 +2,10 @@
    Red primero para los archivos de la app: así cada despliegue llega al
    instante y la caché queda sólo como respaldo cuando no hay conexión.
    Sube CACHE al cambiar esta estrategia: al activarse borra las anteriores. */
-const CACHE = 'cabincrew-v2';
+const CACHE = 'cabincrew-v3';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './styles/app.css',
-  './js/data.js', './js/util.js', './js/srs.js', './js/store.js', './js/avatars.js',
+  './js/data.js', './js/data-esl.js', './js/courses.js', './js/util.js', './js/srs.js', './js/store.js', './js/avatars.js',
   './js/achievements.js', './js/fx.js', './js/exercise.js', './js/app.js',
   './js/views/welcome.js', './js/views/home.js', './js/views/quiz.js',
   './js/views/review.js', './js/views/browse.js', './js/views/profile.js',

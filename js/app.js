@@ -94,6 +94,13 @@ CC.app = (function () {
   }
 
   function boot() {
+    // botones 🔊 de pronunciación en cualquier pantalla
+    document.addEventListener('click', e => {
+      const b = e.target.closest('[data-say]');
+      if (!b) return;
+      e.preventDefault();
+      CC.util.speak(b.dataset.say, CC.course().lang);
+    });
     CC.store.touchDay();
     CC.store.hearts();
     go('home');

@@ -22,6 +22,12 @@ Todo el temario del examen (84 fichas repartidas en 10 unidades) está en
   Capitán Max, Tito, Nimbo, Chispa, Bali, Kit, Rosa, Jet y Luna).
 - **Logros**, estadísticas por unidad, gráfico de actividad semanal y estado del mazo
   (nuevas / aprendiendo / jóvenes / maduras).
+- **Extensión *English for Aviation*** (ESL): inglés técnico de aviación para
+  hispanohablantes, con su propia ruta, mazo Anki, fichas y simulacro. Se cambia de
+  curso con el selector de la parte superior de la ruta. Unidades: seguridad en el
+  aeropuerto, seguridad en el avión, *customer service*, partes y fases del vuelo,
+  anuncios y emergencias, y alfabeto y fraseología OACI. Con botón 🔊 para escuchar
+  la pronunciación en inglés.
 - **PWA instalable y offline**: funciona sin conexión y se puede añadir a la pantalla
   de inicio del móvil.
 
@@ -49,6 +55,8 @@ manifest.webmanifest    PWA
 sw.js                   Service worker (offline)
 styles/app.css          Sistema visual: tokens, modo claro y oscuro
 js/data.js              El temario del examen (fichas y unidades)
+js/data-esl.js          Extensión de inglés técnico de aviación (ESL)
+js/courses.js           Cursos: filtra unidades y fichas según el curso activo
 js/util.js              Utilidades y render de respuestas
 js/srs.js               Repetición espaciada SM-2
 js/store.js             Estado: XP, niveles, racha, corazones, mazo
@@ -74,3 +82,7 @@ Cada ficha de `js/data.js` tiene esta forma:
 Tipos disponibles: `def` (definición), `num` (dato con opciones), `list` (lista con
 `items` y `lures`), `order` (pasos en orden) y `match` (pares). Las lecciones se
 generan solas en grupos de 4 fichas, así que basta con añadir la ficha a su unidad.
+
+Las fichas de la extensión de inglés están en `js/data-esl.js` y usan los mismos
+tipos. En las `def`, `term` es la expresión en inglés y `a` su traducción; el campo
+opcional `say` es el texto que lee el botón 🔊 (por defecto, `term`).

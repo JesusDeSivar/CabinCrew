@@ -71,12 +71,32 @@ CC.util = (function () {
   function frontText(card) {
     return card.type === 'def' && card.term ? card.term : card.q;
   }
-  function unitOf(id) { return CC.UNITS.find(u => u.id === id); }
+  function unitOf(id) { return CC.ALL_UNITS.find(u => u.id === id); }
   function refLabel(card) {
     if (card.ref) return 'Examen · pregunta ' + card.ref;
-    return card.tag || 'Examen';
+    return card.tag || CC.courseOfCard(card).source;
+  }
+
+  /* Pronunciación: sólo para cursos con idioma (el de inglés) */
+  function sayText(card) {
+    if (!CC.courseOfCard(card).lang) return '';
+    return card.say || (card.type === 'def' && card.term) || '';
+  }
+  function sayButton(card) {
+    const t = sayText(card);
+    return t ? `<button class="say" type="button" data-say="${esc(t)}" aria-label="Escuchar: ${esc(t)}">🔊</button>` : '';
+  }
+  function speak(text, lang) {
+    if (!('speechSynthesis' in window) || !text) return;
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = lang || 'en-US';
+    u.rate = 0.9;
+    const voice = speechSynthesis.getVoices().find(v => v.lang && v.lang.replace('_', '-').startsWith(u.lang.slice(0, 2)));
+    if (voice) u.voice = voice;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(u);
   }
 
   return { dayKey, addDays, daysBetween, shuffle, sample, pick, clamp, esc, humanDelay,
-           answerText, answerHTML, frontText, unitOf, refLabel, pad };
+           answerText, answerHTML, frontText, unitOf, refLabel, pad, sayText, sayButton, speak };
 })();

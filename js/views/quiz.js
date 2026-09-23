@@ -101,7 +101,7 @@ window.CC = window.CC || {};
         <div class="sheet-in">
           <p class="sheet-tt">${res.ok ? (combo >= 5 ? '¡Racha de ' + combo + '! 🔥' : CC.util.pick(['¡Correcto!', '¡Muy bien!', '¡Perfecto!', '¡Eso es!'])) : 'Respuesta correcta'}</p>
           ${res.ok ? '' : '<pre class="sheet-ans">' + esc(res.right) + '</pre>'}
-          <p class="sheet-ref">${esc(CC.util.refLabel(ex.card))}</p>
+          <p class="sheet-ref">${esc(CC.util.refLabel(ex.card))} ${CC.util.sayButton(ex.card)}</p>
           <button class="btn ${res.ok ? 'ok' : 'bad'} big" type="button" data-next>CONTINUAR</button>
         </div>`;
       sheet.hidden = false;

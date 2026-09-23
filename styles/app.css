@@ -124,6 +124,28 @@ body[data-view="welcome"] #screen { padding: 0 var(--gut) 0; }
 .row-2 .btn { flex: 1; }
 
 /* ── Saludo + burbuja ──────────────────────────────── */
+/* Selector de curso: examen TCP / English for Aviation */
+.course-switch {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; margin: 2px 0 14px;
+  background: var(--surf-2); border-radius: 999px;
+}
+.course-opt {
+  display: flex; align-items: center; justify-content: center; gap: 6px; min-width: 0;
+  border: 0; border-radius: 999px; padding: 8px 10px; background: transparent; color: var(--muted);
+  font: 600 14px/1.2 var(--display);
+}
+.course-opt span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.course-opt.on { background: var(--surf); color: var(--txt); box-shadow: 0 2px 6px var(--shadow); }
+.course-ic { flex: 0 0 auto; }
+
+/* Botón de pronunciación */
+.say {
+  display: inline-flex; align-items: center; justify-content: center; vertical-align: middle;
+  width: 32px; height: 32px; padding: 0; border: 2px solid var(--line); border-radius: 999px;
+  background: var(--sky-soft); font-size: 15px; line-height: 1;
+}
+.say:active { transform: scale(.94); }
+
 .greet { display: flex; align-items: flex-end; gap: 10px; margin: 4px 0 16px; }
 .greet-av { flex: 0 0 auto; }
 .avatar { display: block; }
