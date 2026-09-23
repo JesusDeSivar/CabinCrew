@@ -8,10 +8,11 @@ CC.exercise = (function () {
 
   function distractorsFor(card, n) {
     const pool = CC.CARDS.filter(c => c.id !== card.id && (c.type === 'def' || c.type === 'num') && c.a);
-    const same = U().shuffle(pool.filter(c => c.unit === card.unit)).map(c => c.a);
-    const rest = U().shuffle(pool.filter(c => c.unit !== card.unit)).map(c => c.a);
+    // primero respuestas del mismo tipo: en inglés, una traducción no debe competir con un «in» o un «for»
+    const rank = c => (c.unit === card.unit ? 0 : 2) + (c.type === card.type ? 0 : 1);
+    const ranked = U().shuffle(pool).sort((a, b) => rank(a) - rank(b)).map(c => c.a);
     const out = [];
-    [...same, ...rest].forEach(a => { if (out.length < n && a !== card.a && !out.includes(a)) out.push(a); });
+    ranked.forEach(a => { if (out.length < n && a !== card.a && !out.includes(a)) out.push(a); });
     return out;
   }
 
@@ -35,9 +36,10 @@ CC.exercise = (function () {
       case 'def': {
         const reverse = card.term && !opts.forward && Math.random() < 0.4;
         if (reverse) {
-          return choice(card, '¿A qué corresponde esta definición?', card.term, termDistractors(card, 3), '«' + card.a + '»');
+          const rq = CC.courseOfCard(card).reversePrompt || '¿A qué corresponde esta definición?';
+          return choice(card, rq, card.term, termDistractors(card, 3), '«' + card.a + '»');
         }
-        return choice(card, card.q, card.a, distractorsFor(card, 3));
+        return Object.assign(choice(card, card.q, card.a, distractorsFor(card, 3)), { say: true });
       }
       case 'num':
         return choice(card, card.q, card.a, card.options.filter(o => o !== card.a).slice(0, 3));
@@ -104,7 +106,7 @@ CC.exercise = (function () {
       </div>`;
     }
     return `<div class="ex" data-kind="${ex.kind}">
-        <p class="ex-prompt">${esc(ex.prompt)}</p>
+        <p class="ex-prompt">${esc(ex.prompt)}${ex.say ? ' ' + U().sayButton(ex.card) : ''}</p>
         ${ex.sub ? `<p class="ex-sub">${esc(ex.sub)}</p>` : ''}
         ${body}
       </div>`;

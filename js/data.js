@@ -371,5 +371,3 @@ CC.CARDS = [
             'Le doy 5 palmadas en la espalda y le insisto en toser.',
             'Si el objeto no sale, hago la maniobra de Heimlich hasta que el objeto salga.'] }
 ];
-
-CC.CARD_BY_ID = Object.fromEntries(CC.CARDS.map(c => [c.id, c]));

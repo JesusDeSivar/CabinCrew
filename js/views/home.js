@@ -52,7 +52,15 @@ CC.app.register('home', {
         </section>`;
     }).join('');
 
+    const course = CC.course();
+    const switcher = `<div class="course-switch" role="group" aria-label="Curso">
+        ${CC.COURSES.map(c => `<button class="course-opt ${c.id === course.id ? 'on' : ''}" type="button"
+            data-course="${c.id}" aria-pressed="${c.id === course.id}">
+            <span class="course-ic">${c.icon}</span><span>${esc(c.short)}</span></button>`).join('')}
+      </div>`;
+
     root.innerHTML = `
+      ${switcher}
       <div class="greet">
         <div class="greet-av">${CC.avatars.svg(s.profile.avatar, 84)}</div>
         <div class="bubble"><p>${msg}</p></div>
@@ -75,7 +83,14 @@ CC.app.register('home', {
       </div>
 
       ${units}
-      <p class="foot-note">Contenido: examen final de tripulante de cabina · ${CC.CARDS.length} fichas</p>`;
+      <p class="foot-note">Contenido: ${esc(course.blurb.toLowerCase())} · ${CC.CARDS.length} fichas</p>`;
+
+    root.querySelectorAll('[data-course]').forEach(b => b.addEventListener('click', () => {
+      if (b.dataset.course === CC.courseId()) return;
+      CC.fx.sfx.tap();
+      CC.store.setCourse(b.dataset.course);
+      CC.app.go('home');
+    }));
 
     root.querySelectorAll('[data-lesson]').forEach(b =>
       b.addEventListener('click', () => CC.app.go('lesson', b.dataset.lesson)));

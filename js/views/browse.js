@@ -9,8 +9,8 @@ CC.app.register('browse', {
 
     root.innerHTML = `
       <div class="browse-head">
-        <h1>Fichas del examen</h1>
-        <input class="search" type="search" id="browse-search" placeholder="Buscar: APU, hipoxia, anexo 6…"
+        <h1>Fichas · ${esc(CC.course().name)}</h1>
+        <input class="search" type="search" id="browse-search" placeholder="${CC.courseId() === 'esl' ? 'Buscar: boarding pass, galley, Roger…' : 'Buscar: APU, hipoxia, anexo 6…'}"
                autocomplete="off" aria-label="Buscar en las fichas">
         <div class="filters" role="group" aria-label="Filtrar por unidad">
           <button class="fchip on" type="button" data-f="all">Todas</button>
@@ -51,7 +51,7 @@ CC.app.register('browse', {
             <div class="bcard-body">
               ${c.type === 'def' && c.term ? `<p class="bcard-sub">${esc(c.q)}</p>` : ''}
               ${CC.util.answerHTML(c)}
-              <p class="bcard-foot">${esc(CC.util.refLabel(c))}${due ? ' · repaso ' + due : ''}</p>
+              <p class="bcard-foot">${esc(CC.util.refLabel(c))}${due ? ' · repaso ' + due : ''} ${CC.util.sayButton(c)}</p>
             </div>
           </details>`;
       }).join('');

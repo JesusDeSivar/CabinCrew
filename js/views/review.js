@@ -101,7 +101,7 @@ CC.app.register('reviewrun', {
           </div>
           <div class="flash-back" hidden>
             <div class="flash-a">${CC.util.answerHTML(card)}</div>
-            <p class="flash-ref">${esc(CC.util.refLabel(card))}</p>
+            <p class="flash-ref">${esc(CC.util.refLabel(card))} ${CC.util.sayButton(card)}</p>
           </div>
         </article>
         <div class="flash-actions">
