@@ -21,6 +21,17 @@ CC.app.register('home', {
     else if (h > 21) msg = `Vuelo nocturno, ${esc(name)}. Una lección corta y a dormir. 🌙`;
     else msg = `¿Repasamos, ${esc(name)}? Te toca la unidad de ${esc(next ? CC.util.unitOf(next.unit).name.toLowerCase() : 'repaso')}.`;
 
+    const course = CC.course();
+    const src = CC.sourceId();
+    // con todos los orígenes a la vista, cada uno abre su tramo de la ruta con un rótulo
+    const heads = {};
+    if (course.sources && src === 'all') {
+      course.sources.forEach(o => {
+        const first = CC.UNITS.find(u => u.src === o.id);
+        if (first) heads[first.id] = o;
+      });
+    }
+
     const units = CC.UNITS.map(u => {
       const prog = CC.store.unitProgress(u.id);
       const lessons = CC.store.lessonsOfUnit(u.id);
@@ -39,7 +50,10 @@ CC.app.register('home', {
           </div>`;
       }).join('');
 
-      return `<section class="unit" style="--hue:${u.hue}">
+      const head = heads[u.id];
+      return `${head ? `<h2 class="src-head"><span class="src-tag ${head.id}">${esc(head.tag)}</span>
+            ${esc(head.name)} <small>${CC.util.sourceCount(course.id, head.id)} fichas${head.blurb ? ' · ' + esc(head.blurb) : ''}</small></h2>` : ''}
+        <section class="unit" style="--hue:${u.hue}">
           <header class="unit-head">
             <span class="unit-ic">${u.icon}</span>
             <div class="unit-tt">
@@ -52,7 +66,6 @@ CC.app.register('home', {
         </section>`;
     }).join('');
 
-    const course = CC.course();
     const switcher = `<div class="course-switch" role="group" aria-label="Curso">
         ${CC.COURSES.map(c => `<button class="course-opt ${c.id === course.id ? 'on' : ''}" type="button"
             data-course="${c.id}" aria-pressed="${c.id === course.id}">
@@ -61,6 +74,7 @@ CC.app.register('home', {
 
     root.innerHTML = `
       ${switcher}
+      ${CC.util.sourceSwitch()}
       <div class="greet">
         <div class="greet-av">${CC.avatars.svg(s.profile.avatar, 84)}</div>
         <div class="bubble"><p>${msg}</p></div>
@@ -83,7 +97,9 @@ CC.app.register('home', {
       </div>
 
       ${units}
-      <p class="foot-note">Contenido: ${esc(course.blurb.toLowerCase())} · ${CC.CARDS.length} fichas</p>`;
+      <p class="foot-note">Contenido: ${esc(course.sources
+        ? course.sources.filter(o => src === 'all' || o.id === src).map(o => o.name).join(' + ')
+        : course.blurb.toLowerCase())} · ${CC.CARDS.length} fichas</p>`;
 
     root.querySelectorAll('[data-course]').forEach(b => b.addEventListener('click', () => {
       if (b.dataset.course === CC.courseId()) return;
@@ -91,6 +107,8 @@ CC.app.register('home', {
       CC.store.setCourse(b.dataset.course);
       CC.app.go('home');
     }));
+
+    CC.util.bindSourceSwitch(root);
 
     root.querySelectorAll('[data-lesson]').forEach(b =>
       b.addEventListener('click', () => CC.app.go('lesson', b.dataset.lesson)));

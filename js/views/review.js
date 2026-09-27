@@ -98,6 +98,7 @@ CC.app.register('reviewrun', {
           <div class="flash-front">
             <p class="flash-q">${esc(CC.util.frontText(card))}</p>
             ${card.type === 'def' && card.term ? `<p class="flash-hint">${esc(card.q)}</p>` : ''}
+            ${CC.util.isTrueFalse(card) ? '<p class="flash-hint">¿Verdadero o falso?</p>' : ''}
           </div>
           <div class="flash-back" hidden>
             <div class="flash-a">${CC.util.answerHTML(card)}</div>

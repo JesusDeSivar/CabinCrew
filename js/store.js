@@ -30,7 +30,7 @@ CC.store = (function () {
       stats: { answered: 0, correct: 0, reviews: 0, exams: 0, examBest: 0, byUnit: {} },
       achievements: {},
       avatars: { unlocked: ['avi', 'lia'] },
-      settings: { sound: true, haptics: true, newPerDay: 15, maxReviews: 60, course: 'tcp' }
+      settings: { sound: true, haptics: true, newPerDay: 15, maxReviews: 60, course: 'tcp', sources: {} }
     };
   }
 
@@ -93,8 +93,10 @@ CC.store = (function () {
     const l = lessonById(id);
     if (!l) return 'locked';
     const unitLessons = lessonsOfUnit(l.unit);
-    // cada curso tiene su propia ruta: la unidad anterior es la de su mismo curso
-    const units = CC.unitsOf(CC.util.unitOf(l.unit).course);
+    // cada curso (y cada origen dentro del curso) tiene su propia ruta:
+    // la unidad anterior es la de su mismo curso y origen
+    const unit = CC.util.unitOf(l.unit);
+    const units = CC.unitsOf(unit.course).filter(u => u.src === unit.src);
     const uIndex = units.findIndex(u => u.id === l.unit);
     if (l.index === 0) {
       if (uIndex === 0) return 'open';
@@ -294,6 +296,13 @@ CC.store = (function () {
     save();
   }
 
+  function setSource(courseId, id) {
+    const course = CC.course(courseId);
+    if (id !== 'all' && !(course.sources || []).some(x => x.id === id)) return;
+    state.settings.sources = Object.assign({}, state.settings.sources, { [course.id]: id });
+    save();
+  }
+
   function reset() { state = defaults(); save(); }
 
   function importState(obj) {
@@ -309,6 +318,6 @@ CC.store = (function () {
     touchDay, registerActivity, addXP, weekHistory,
     hearts, loseHeart, gainHeart, heartTimer, HEART_MAX, HEART_REFILL_MS,
     srsCard, gradeCard, introduce, dueCards, newCards, reviewQueue, srsCounts,
-    recordAnswer, completeLesson, recordExam, accuracy, setCourse
+    recordAnswer, completeLesson, recordExam, accuracy, setCourse, setSource
   };
 })();

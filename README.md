@@ -5,6 +5,10 @@ y con fichas de repetición espaciada estilo Anki.
 
 Todo el temario del examen (84 fichas repartidas en 10 unidades) está en
 [`js/data.js`](js/data.js), con la referencia al número de pregunta original.
+El banco de preguntas del *Examen de Auxiliar de Cabina* de la Autoridad de Aviación
+Civil de El Salvador (AAC, 149 preguntas en 13 unidades) está en
+[`js/data-aac.js`](js/data-aac.js), con su número de pregunta en el PDF y la
+respuesta que marca la clave oficial.
 
 ## Qué incluye
 
@@ -18,6 +22,14 @@ Todo el temario del examen (84 fichas repartidas en 10 unidades) está en
   procedimiento y emparejar (por ejemplo, los colores de las luces de llamado).
 - **Simulacro de examen**: 30 preguntas al azar, cronómetro, nota, unidades flojas y
   repaso de los fallos. También hay simulacro por unidad.
+- **Banco AAC**: las preguntas oficiales de opción múltiple (3 opciones o verdadero/falso),
+  numeradas 1-2-3 como en el examen. Las opciones que dependen de las demás
+  (*«ambas»*, *«1 y 2 son correctas»*, *«ninguna de las anteriores»*) mantienen el orden
+  original; el resto se barajan.
+- **Filtro de origen** (*Todo / Examen final / Banco AAC*) en la ruta, las fichas y el
+  simulacro: estudia las dos fuentes juntas o cada una por separado. Cada origen tiene
+  su propio tramo de ruta, así que filtrar no bloquea ni borra progreso, y en la vista
+  *Todo* cada ficha lleva su etiqueta (`FINAL` o `AAC`).
 - **Personajes desbloqueables** dibujados en SVG: aviones y tripulantes (Avi, Lía,
   Capitán Max, Tito, Nimbo, Chispa, Bali, Kit, Rosa, Jet y Luna).
 - **Logros**, estadísticas por unidad, gráfico de actividad semanal y estado del mazo
@@ -55,6 +67,7 @@ manifest.webmanifest    PWA
 sw.js                   Service worker (offline)
 styles/app.css          Sistema visual: tokens, modo claro y oscuro
 js/data.js              El temario del examen (fichas y unidades)
+js/data-aac.js          Banco de preguntas del examen de la AAC de El Salvador
 js/data-esl.js          Extensión de inglés técnico de aviación (ESL)
 js/courses.js           Cursos: filtra unidades y fichas según el curso activo
 js/util.js              Utilidades y render de respuestas
@@ -80,8 +93,15 @@ Cada ficha de `js/data.js` tiene esta forma:
 ```
 
 Tipos disponibles: `def` (definición), `num` (dato con opciones), `list` (lista con
-`items` y `lures`), `order` (pasos en orden) y `match` (pares). Las lecciones se
-generan solas en grupos de 4 fichas, así que basta con añadir la ficha a su unidad.
+`items` y `lures`), `order` (pasos en orden), `match` (pares) y `mc` (pregunta de
+examen con sus `options` en el orden original; con dos opciones es verdadero/falso).
+Las lecciones se generan solas en grupos de 4 fichas, así que basta con añadir la
+ficha a su unidad.
+
+Las unidades del curso TCP llevan un origen (`src`): `final` para las de `js/data.js`
+y `aac` para las de `js/data-aac.js`. Para sumar otra fuente, se declara en `sources`
+del curso en `js/courses.js` y se le da ese `src` a sus unidades; el filtro la muestra
+sola.
 
 Las fichas de la extensión de inglés están en `js/data-esl.js` y usan los mismos
 tipos. En las `def`, `term` es la expresión en inglés y `a` su traducción; el campo

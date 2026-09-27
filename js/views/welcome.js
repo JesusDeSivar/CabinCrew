@@ -9,7 +9,8 @@ CC.app.register('welcome', {
       <div class="welcome">
         <div class="welcome-art">${CC.avatars.svg('avi', 120, 'bob')}</div>
         <h1>Bienvenida a bordo</h1>
-        <p class="lead">Tu examen final de tripulante de cabina, convertido en 84 fichas, 10 unidades y repaso Anki.</p>
+        <p class="lead">Tu examen final de tripulante de cabina y el banco de preguntas de la AAC, convertidos en
+          ${CC.util.sourceCount('tcp', 'all')} fichas, ${CC.unitsOf('tcp').length} unidades y repaso Anki.</p>
         <label class="field">
           <span>¿Cómo te llamamos?</span>
           <input type="text" id="wel-name" placeholder="Tu nombre" maxlength="24" autocomplete="given-name">
