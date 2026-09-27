@@ -6,6 +6,8 @@ CC.exercise = (function () {
 
   /* ── Generación ──────────────────────────────────────── */
 
+  const REFERS_TO_OTHERS = /^(ambas|ambos|\d y \d|ningun[oa] de l[oa]s anteriores|todas las anteriores)\b/i;
+
   function distractorsFor(card, n) {
     const pool = CC.CARDS.filter(c => c.id !== card.id && (c.type === 'def' || c.type === 'num') && c.a);
     // primero respuestas del mismo tipo: en inglés, una traducción no debe competir con un «in» o un «for»
@@ -43,6 +45,18 @@ CC.exercise = (function () {
       }
       case 'num':
         return choice(card, card.q, card.a, card.options.filter(o => o !== card.a).slice(0, 3));
+
+      case 'mc': {
+        const ex = choice(card, card.q, card.a, card.options.filter(o => o !== card.a),
+                          U().isTrueFalse(card) ? '¿Verdadero o falso?' : undefined);
+        // «Ambas», «1 y 2» o «ninguna de las anteriores» dependen del orden: se deja el del examen
+        if (U().isTrueFalse(card) || card.options.some(o => REFERS_TO_OTHERS.test(o))) {
+          ex.options = card.options.map(t => ({ text: t, ok: t === card.a }));
+        }
+        // numeradas como en el examen, así «1 y 2 son correctas» se lee tal cual
+        ex.keys = U().isTrueFalse(card) ? ['V', 'F'] : card.options.map((_, i) => String(i + 1));
+        return ex;
+      }
 
       case 'list': {
         if (card.items.length > 3 && Math.random() < 0.45) {
@@ -88,7 +102,7 @@ CC.exercise = (function () {
     if (ex.kind === 'choice' || ex.kind === 'multi') {
       body = '<div class="opts" role="group">' + ex.options.map((o, i) =>
         `<button class="opt" type="button" data-i="${i}">
-           <span class="opt-key">${KEYS[i]}</span><span class="opt-txt">${esc(o.text)}</span>
+           <span class="opt-key">${(ex.keys || KEYS)[i]}</span><span class="opt-txt">${esc(o.text)}</span>
          </button>`).join('') + '</div>';
     } else if (ex.kind === 'order') {
       body = `<div class="slots" data-slots aria-label="Orden elegido">

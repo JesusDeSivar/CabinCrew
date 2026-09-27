@@ -197,11 +197,15 @@ window.CC = window.CC || {};
     tab: 'exam',
     render(root) {
       const s = CC.store.get();
+      const src = CC.sourceId();
+      const scope = src === 'all' ? 'todo el temario'
+        : 'el ' + CC.course().sources.find(o => o.id === src).name.replace(/^./, c => c.toLowerCase());
       root.innerHTML = `
         <div class="panel">
           <div class="panel-hero">${CC.avatars.svg('jet', 96)}</div>
           <h1>Simulacro de examen</h1>
-          <p class="lead">30 preguntas al azar de todo el temario. Sin corazones y sin pistas: las respuestas se revisan al final. Se aprueba con <b>70%</b>.</p>
+          ${CC.util.sourceSwitch()}
+          <p class="lead">30 preguntas al azar de ${esc(scope)}. Sin corazones y sin pistas: las respuestas se revisan al final. Se aprueba con <b>70%</b>.</p>
           <ul class="facts">
             <li><span>Preguntas</span><b>30</b></li>
             <li><span>Aprobado</span><b>70%</b></li>
@@ -211,6 +215,7 @@ window.CC = window.CC || {};
           <button class="btn primary big full" type="button" data-start>EMPEZAR SIMULACRO</button>
           <button class="btn ghost big full" type="button" data-unit>EXAMEN POR UNIDAD</button>
         </div>`;
+      CC.util.bindSourceSwitch(root);
       root.querySelector('[data-start]').addEventListener('click', () => CC.app.go('examrun', null));
       root.querySelector('[data-unit]').addEventListener('click', () => {
         root.querySelector('.panel').insertAdjacentHTML('beforeend',

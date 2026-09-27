@@ -10,6 +10,7 @@ CC.app.register('browse', {
     root.innerHTML = `
       <div class="browse-head">
         <h1>Fichas · ${esc(CC.course().name)}</h1>
+        ${CC.util.sourceSwitch()}
         <input class="search" type="search" id="browse-search" placeholder="${CC.courseId() === 'esl' ? 'Buscar: boarding pass, galley, Roger…' : 'Buscar: APU, hipoxia, anexo 6…'}"
                autocomplete="off" aria-label="Buscar en las fichas">
         <div class="filters" role="group" aria-label="Filtrar por unidad">
@@ -45,7 +46,7 @@ CC.app.register('browse', {
         return `<details class="bcard" style="--hue:${u.hue}">
             <summary>
               <span class="bcard-ic">${u.icon}</span>
-              <span class="bcard-q">${esc(CC.util.frontText(c))}</span>
+              <span class="bcard-q">${CC.util.sourceTag(c)}${esc(CC.util.frontText(c))}</span>
               <span class="bcard-state ${b}">${label}</span>
             </summary>
             <div class="bcard-body">
@@ -57,6 +58,7 @@ CC.app.register('browse', {
       }).join('');
     }
 
+    CC.util.bindSourceSwitch(root);
     search.addEventListener('input', e => { query = e.target.value; draw(); });
     root.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => {
       filter = b.dataset.f;
