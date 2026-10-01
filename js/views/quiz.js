@@ -198,14 +198,14 @@ window.CC = window.CC || {};
     render(root) {
       const s = CC.store.get();
       const src = CC.sourceId();
-      const scope = src === 'all' ? 'todo el temario'
-        : 'el ' + CC.course().sources.find(o => o.id === src).name.replace(/^./, c => c.toLowerCase());
+      const scope = src === 'all' ? 'de todo el temario'
+        : 'del ' + CC.course().sources.find(o => o.id === src).name.replace(/^./, c => c.toLowerCase());
       root.innerHTML = `
         <div class="panel">
           <div class="panel-hero">${CC.avatars.svg('jet', 96)}</div>
           <h1>Simulacro de examen</h1>
           ${CC.util.sourceSwitch()}
-          <p class="lead">30 preguntas al azar de ${esc(scope)}. Sin corazones y sin pistas: las respuestas se revisan al final. Se aprueba con <b>70%</b>.</p>
+          <p class="lead">30 preguntas al azar ${esc(scope)}. Sin corazones y sin pistas: las respuestas se revisan al final. Se aprueba con <b>70%</b>.</p>
           <ul class="facts">
             <li><span>Preguntas</span><b>30</b></li>
             <li><span>Aprobado</span><b>70%</b></li>

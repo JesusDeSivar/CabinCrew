@@ -10,6 +10,9 @@
   --lav: #7C5CFF;  --lav-d: #5B3DD6;
   --tag-final: #1274BE; --tag-final-bg: #E2F0FD;
   --tag-aac: #8A5300;   --tag-aac-bg: #FFF1D9;
+  --tag-cp1: #0E7F45;   --tag-cp1-bg: #DDF7E9;
+  --tag-cp2: #5B3DD6;   --tag-cp2-bg: #ECE7FF;
+  --tag-cp3: #B4232F;   --tag-cp3-bg: #FFE4E7;
   --ok-txt: #0E7F45;
 
   --bg: #F2F6FB;
@@ -32,6 +35,7 @@
     --bg: #0A1626; --surf: #122238; --surf-2: #1A2E4A; --line: #24395C; --line-2: #31507C;
     --txt: #E9F1FB; --muted: #93A7C2; --shadow: rgba(0, 0, 0, .45);
     --tag-final: #8CC8F5; --tag-final-bg: #10304C; --tag-aac: #FFC962; --tag-aac-bg: #3D2E12; --ok-txt: #4ADE94;
+    --tag-cp1: #4ADE94; --tag-cp1-bg: #0E3B27; --tag-cp2: #B9A8FF; --tag-cp2-bg: #2A2152; --tag-cp3: #FF8A95; --tag-cp3-bg: #44202A;
   }
 }
 :root[data-theme="dark"] {
@@ -39,6 +43,7 @@
   --bg: #0A1626; --surf: #122238; --surf-2: #1A2E4A; --line: #24395C; --line-2: #31507C;
   --txt: #E9F1FB; --muted: #93A7C2; --shadow: rgba(0, 0, 0, .45);
   --tag-final: #8CC8F5; --tag-final-bg: #10304C; --tag-aac: #FFC962; --tag-aac-bg: #3D2E12; --ok-txt: #4ADE94;
+  --tag-cp1: #4ADE94; --tag-cp1-bg: #0E3B27; --tag-cp2: #B9A8FF; --tag-cp2-bg: #2A2152; --tag-cp3: #FF8A95; --tag-cp3-bg: #44202A;
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -143,7 +148,7 @@ body[data-view="welcome"] #screen { padding: 0 var(--gut) 0; }
 .course-opt.on { background: var(--surf); color: var(--txt); box-shadow: 0 2px 6px var(--shadow); }
 .course-ic { flex: 0 0 auto; }
 
-/* Filtro de origen: todo / examen final / banco AAC */
+/* Filtro de origen: todo / examen final / banco AAC (o curso básico / libros 1-3) */
 .src-switch { display: flex; gap: 6px; margin: -4px 0 14px; }
 .panel .src-switch { margin: 0; }
 .src-opt {
@@ -160,6 +165,9 @@ body[data-view="welcome"] #screen { padding: 0 var(--gut) 0; }
   background: var(--tag-final-bg); color: var(--tag-final);
 }
 .src-tag.aac { background: var(--tag-aac-bg); color: var(--tag-aac); }
+.src-tag.cp1 { background: var(--tag-cp1-bg); color: var(--tag-cp1); }
+.src-tag.cp2 { background: var(--tag-cp2-bg); color: var(--tag-cp2); }
+.src-tag.cp3 { background: var(--tag-cp3-bg); color: var(--tag-cp3); }
 .src-head { font-size: 17px; margin: 6px 0 14px; }
 .src-head small { display: block; margin-top: 2px; font: 400 12.5px/1.4 var(--body); color: var(--muted); }
 .unit + .src-head { margin-top: 34px; padding-top: 18px; border-top: 2px dashed var(--line); }

@@ -86,6 +86,9 @@ CC.util = (function () {
   function refLabel(card) {
     const src = CC.sourceOf(card);
     if (card.ref) return (src ? src.ref : 'Examen') + ' · pregunta ' + card.ref;
+    // unidades numeradas de un libro (Career Paths): «Career Paths 2 · unidad 6»
+    const u = unitOf(card.unit);
+    if (src && u && u.n) return src.ref + ' · unidad ' + u.n;
     return card.tag || CC.courseOfCard(card).source;
   }
 
