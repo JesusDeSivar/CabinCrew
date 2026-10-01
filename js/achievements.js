@@ -2,17 +2,26 @@
 window.CC = window.CC || {};
 
 CC.achievements = (function () {
+  const srcDone = (course, src) =>
+    CC.unitsOf(course).filter(u => u.src === src).every(u => CC.store.unitProgress(u.id).pct >= 1);
+
   const LIST = [
     { id: 'first',    icon: '🛫', name: 'Primer despegue',   desc: 'Completa tu primera lección',
       check: s => Object.values(s.lessons).filter(l => l.done).length >= 1 },
     { id: 'ten',      icon: '🗺️', name: 'Plan de vuelo',      desc: 'Completa 10 lecciones',
       check: s => Object.values(s.lessons).filter(l => l.done).length >= 10 },
     { id: 'allunits', icon: '🏆', name: 'Manual completo',    desc: 'Termina todas las unidades del examen final',
-      check: () => CC.unitsOf('tcp').filter(u => u.src === 'final').every(u => CC.store.unitProgress(u.id).pct >= 1) },
+      check: () => srcDone('tcp', 'final') },
     { id: 'aacbank',  icon: '🏛️', name: 'Banco AAC dominado', desc: 'Termina todas las unidades del banco AAC',
-      check: () => CC.unitsOf('tcp').filter(u => u.src === 'aac').every(u => CC.store.unitProgress(u.id).pct >= 1) },
-    { id: 'bilingual', icon: '🇬🇧', name: 'Tripulación bilingüe', desc: 'Termina todas las unidades de English for Aviation',
-      check: () => CC.unitsOf('esl').every(u => CC.store.unitProgress(u.id).pct >= 1) },
+      check: () => srcDone('tcp', 'aac') },
+    { id: 'bilingual', icon: '🇬🇧', name: 'Tripulación bilingüe', desc: 'Termina el curso básico de English for Aviation',
+      check: () => srcDone('esl', 'base') },
+    { id: 'cp1',      icon: '📗', name: 'Libro 1 superado',    desc: 'Termina las 15 unidades del libro 1 de Career Paths',
+      check: () => srcDone('esl', 'cp1') },
+    { id: 'cp2',      icon: '📘', name: 'Libro 2 superado',    desc: 'Termina las 15 unidades del libro 2 de Career Paths',
+      check: () => srcDone('esl', 'cp2') },
+    { id: 'cp3',      icon: '📙', name: 'Libro 3 superado',    desc: 'Termina las 15 unidades del libro 3 de Career Paths',
+      check: () => srcDone('esl', 'cp3') },
     { id: 'streak3',  icon: '🔥', name: 'Racha de 3 días',    desc: 'Estudia 3 días seguidos',
       check: s => s.streak.best >= 3 },
     { id: 'streak7',  icon: '🔥', name: 'Semana perfecta',    desc: 'Estudia 7 días seguidos',

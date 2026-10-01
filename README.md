@@ -36,10 +36,21 @@ respuesta que marca la clave oficial.
   (nuevas / aprendiendo / jóvenes / maduras).
 - **Extensión *English for Aviation*** (ESL): inglés técnico de aviación para
   hispanohablantes, con su propia ruta, mazo Anki, fichas y simulacro. Se cambia de
-  curso con el selector de la parte superior de la ruta. Unidades: seguridad en el
-  aeropuerto, seguridad en el avión, *customer service*, partes y fases del vuelo,
-  anuncios y emergencias, y alfabeto y fraseología OACI. Con botón 🔊 para escuchar
-  la pronunciación en inglés.
+  curso con el selector de la parte superior de la ruta. Con botón 🔊 para escuchar
+  la pronunciación en inglés. Tiene cuatro orígenes, con el mismo filtro que el curso
+  TCP (*Todo / Básico / Libro 1 / Libro 2 / Libro 3*):
+  - **Curso básico** (79 fichas, 6 unidades): seguridad en el aeropuerto, seguridad en
+    el avión, *customer service*, partes y fases del vuelo, anuncios y emergencias, y
+    alfabeto y fraseología OACI.
+  - **Libros 1, 2 y 3 de *Career Paths: Flight Attendant*** (652 fichas, 45 unidades):
+    el temario de los tres libros, unidad por unidad. Cada unidad trae su vocabulario
+    (una ficha por palabra, con traducción y, a menudo, un ejemplo o un falso amigo) y
+    su función comunicativa (*Introductions*, *Offering assistance*, *Giving a
+    reminder*…) con una pregunta de «¿qué dirías?» y un emparejamiento de frases útiles.
+    El libro 1 va de la tripulación, el aeropuerto y el avión; el 2 sigue las fases del
+    vuelo; el 3, la carrera, el CRM, las emergencias y la seguridad a bordo. Las
+    traducciones y los ejemplos son propios: del libro se toman el índice y las listas
+    de vocabulario.
 - **PWA instalable y offline**: funciona sin conexión y se puede añadir a la pantalla
   de inicio del móvil.
 
@@ -68,7 +79,8 @@ sw.js                   Service worker (offline)
 styles/app.css          Sistema visual: tokens, modo claro y oscuro
 js/data.js              El temario del examen (fichas y unidades)
 js/data-aac.js          Banco de preguntas del examen de la AAC de El Salvador
-js/data-esl.js          Extensión de inglés técnico de aviación (ESL)
+js/data-esl.js          Extensión de inglés técnico de aviación (ESL): curso básico
+js/data-esl-cp1.js      ESL: libro 1 de Career Paths: Flight Attendant (y cp2, cp3)
 js/courses.js           Cursos: filtra unidades y fichas según el curso activo
 js/util.js              Utilidades y render de respuestas
 js/srs.js               Repetición espaciada SM-2
@@ -103,6 +115,11 @@ y `aac` para las de `js/data-aac.js`. Para sumar otra fuente, se declara en `sou
 del curso en `js/courses.js` y se le da ese `src` a sus unidades; el filtro la muestra
 sola.
 
-Las fichas de la extensión de inglés están en `js/data-esl.js` y usan los mismos
-tipos. En las `def`, `term` es la expresión en inglés y `a` su traducción; el campo
-opcional `say` es el texto que lee el botón 🔊 (por defecto, `term`).
+Las fichas de la extensión de inglés están en `js/data-esl.js` (curso básico, origen
+`base`) y en `js/data-esl-cp1.js`, `-cp2.js` y `-cp3.js` (un archivo por libro de
+*Career Paths*, orígenes `cp1`, `cp2` y `cp3`), y usan los mismos tipos. En las `def`,
+`term` es la expresión en inglés y `a` su traducción; el campo opcional `say` es el
+texto que lee el botón 🔊 (por defecto, `term`), y `syn` lista los sinónimos de la
+misma unidad (*cockpit* y *flight deck*, *baggage* y *luggage*…), que nunca salen
+como opción falsa el uno del otro. Las unidades de los libros llevan su número (`n`),
+que aparece en la referencia de cada ficha (*Career Paths 2 · unidad 6*).

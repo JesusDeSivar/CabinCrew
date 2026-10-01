@@ -8,8 +8,14 @@ CC.exercise = (function () {
 
   const REFERS_TO_OTHERS = /^(ambas|ambos|\d y \d|ningun[oa] de l[oa]s anteriores|todas las anteriores)\b/i;
 
+  /* Sinónimos (`syn`): «cockpit» y «flight deck» no compiten entre sí como distractores */
+  const lc = t => String(t || '').toLowerCase();
+  const synonyms = (a, b) => (a.syn || []).some(t => lc(t) === lc(b.term)) ||
+                             (b.syn || []).some(t => lc(t) === lc(a.term));
+
   function distractorsFor(card, n) {
-    const pool = CC.CARDS.filter(c => c.id !== card.id && (c.type === 'def' || c.type === 'num') && c.a);
+    const pool = CC.CARDS.filter(c => c.id !== card.id && (c.type === 'def' || c.type === 'num') && c.a &&
+                                      !synonyms(card, c));
     // primero respuestas del mismo tipo: en inglés, una traducción no debe competir con un «in» o un «for»
     const rank = c => (c.unit === card.unit ? 0 : 2) + (c.type === card.type ? 0 : 1);
     const ranked = U().shuffle(pool).sort((a, b) => rank(a) - rank(b)).map(c => c.a);
@@ -19,7 +25,7 @@ CC.exercise = (function () {
   }
 
   function termDistractors(card, n) {
-    const pool = CC.CARDS.filter(c => c.id !== card.id && c.type === 'def' && c.term);
+    const pool = CC.CARDS.filter(c => c.id !== card.id && c.type === 'def' && c.term && !synonyms(card, c));
     const same = U().shuffle(pool.filter(c => c.unit === card.unit)).map(c => c.term);
     const rest = U().shuffle(pool.filter(c => c.unit !== card.unit)).map(c => c.term);
     const out = [];

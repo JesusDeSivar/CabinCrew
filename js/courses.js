@@ -3,8 +3,9 @@
    repaso, las fichas y el simulacro se ciñen a él. El total está en
    CC.ALL_UNITS y CC.ALL_CARDS.
    Un curso puede reunir varios orígenes (el TCP junta el examen final y el
-   banco de la AAC): cada unidad lleva su `src` y el filtro de origen del
-   curso decide cuáles entran en CC.UNITS. */
+   banco de la AAC; el ESL, su curso básico y los tres libros de Career
+   Paths): cada unidad lleva su `src` y el filtro de origen del curso decide
+   cuáles entran en CC.UNITS. */
 window.CC = window.CC || {};
 
 CC.COURSES = [
@@ -17,12 +18,23 @@ CC.COURSES = [
     ] },
   { id: 'esl', name: 'English for Aviation', short: 'Inglés técnico', icon: '🇬🇧',
     blurb: 'Inglés técnico de aviación para hispanohablantes', source: 'English for Aviation',
-    lang: 'en-US', reversePrompt: '¿Cómo se dice en inglés?' }
+    lang: 'en-US', reversePrompt: '¿Cómo se dice en inglés?',
+    // curso básico + los tres libros de Career Paths: Flight Attendant; en los libros, `ref` y el `n` de la unidad forman la referencia
+    sources: [
+      { id: 'base', name: 'Curso básico', short: 'Básico', tag: 'Básico', ref: 'English for Aviation' },
+      { id: 'cp1', name: 'Libro 1 de Career Paths', short: 'Libro 1', tag: 'Libro 1', ref: 'Career Paths 1',
+        blurb: 'Tripulación, aeropuerto, avión, imagen y tipos de vuelo' },
+      { id: 'cp2', name: 'Libro 2 de Career Paths', short: 'Libro 2', tag: 'Libro 2', ref: 'Career Paths 2',
+        blurb: 'Las fases del vuelo, del briefing a la llegada' },
+      { id: 'cp3', name: 'Libro 3 de Career Paths', short: 'Libro 3', tag: 'Libro 3', ref: 'Career Paths 3',
+        blurb: 'Carrera, CRM, emergencias y seguridad a bordo' }
+    ] }
 ];
 
 CC.ALL_UNITS = CC.UNITS.map(u => Object.assign({ course: 'tcp', src: 'final' }, u))
-  .concat(CC.AAC.UNITS, CC.ESL.UNITS);
-CC.ALL_CARDS = CC.CARDS.concat(CC.AAC.CARDS, CC.ESL.CARDS);
+  .concat(CC.AAC.UNITS, CC.ESL.UNITS.map(u => Object.assign({ src: 'base' }, u)),
+          CC.CP1.UNITS, CC.CP2.UNITS, CC.CP3.UNITS);
+CC.ALL_CARDS = CC.CARDS.concat(CC.AAC.CARDS, CC.ESL.CARDS, CC.CP1.CARDS, CC.CP2.CARDS, CC.CP3.CARDS);
 CC.CARD_BY_ID = Object.fromEntries(CC.ALL_CARDS.map(c => [c.id, c]));
 
 CC.courseId = function () {
